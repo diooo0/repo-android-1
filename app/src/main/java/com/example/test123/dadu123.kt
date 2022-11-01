@@ -3,59 +3,57 @@ package com.example.test123
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.arc.latihan.R
 
-class dadu123 :ComponentActivity() {
+class DaduActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent{
-            Dadu()
+        setContent {
+            DiceApp()
         }
     }
 }
-@Preview(showSystemUi = true, showBackground = true)
+
+@Preview(showSystemUi = true)
 @Composable
-fun Dadu(){
+fun DiceApp(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
-    ) {
-
-        var diceValue by remember{
+    ){
+        var diceValue by remember {
             mutableStateOf(1)
         }
 
-        val image = when (diceValue){
-            1 -> R.drawable.ic_launcher_background
-            2 -> R.drawable.ic_launcher_background
-            3 -> R.drawable.ic_launcher_background
-            4 -> R.drawable.ic_launcher_background
-            5 -> R.drawable.ic_launcher_background
-            6 -> R.drawable.ic_launcher_background
+        val image = when (diceValue) {
+            1 -> R.drawable.dice_1_b_svg
+            2 -> R.drawable.dice_2_b_svg
+            3 -> R.drawable.dice_3_b_svg
+            4 -> R.drawable.dice_4_b_svg
+            5 -> R.drawable.dice_5_b_svg
             else -> {
-                R.drawable.ic_launcher_foreground
+                R.drawable.dice_6_b_svg
             }
         }
 
-        Image(painter = painterResource(
-            id = R.drawable.ic_launcher_background ),
-            contentDescription ="Gambar"
+        androidx.compose.foundation.Image(
+            painter = painterResource(id = image),
+            contentDescription = null
         )
+
         Spacer(
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(28.dp)
         )
+
         Button(
             onClick = {
                 diceValue = (1..6).random()
@@ -64,7 +62,5 @@ fun Dadu(){
                 Text(text = "Roll")
             }
         )
-
     }
-
 }
